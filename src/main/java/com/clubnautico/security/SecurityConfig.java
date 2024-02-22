@@ -56,7 +56,7 @@ public class SecurityConfig {
 		        }))
 				.authorizeHttpRequests(authRequest -> authRequest
 		        		.requestMatchers("/api/v1/auth/**").permitAll()
-		        		.requestMatchers("/api/v1/personas/**").hasAnyAuthority(Rol.ADMIN.name())
+		        		//.requestMatchers("/api/v1/personas/**").hasAnyAuthority(Rol.ADMIN.name())
 		        		.anyRequest().authenticated())
 				.sessionManagement(session -> session
 		        		.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
