@@ -90,6 +90,25 @@ public class SalidaServiceImpl implements SalidaService{
 		
 		return res;
 	}
+	
+	@Override
+	public List<SalidaDTO> findByPatronId(long id) {
+		Optional<Patron> patron = patronRepositoryImpl.findById(id);
+		List<SalidaDTO> res = new ArrayList<>();
+		
+		if(!patron.isPresent()) {
+			throw new ResourceNotFoundException("Este patrón no existe");
+		}else {
+			List<Salida> salidas = salidaRepositoryImpl.findByPatronId(id);
+			
+			for(Salida s: salidas) {
+				res.add(mappingSalidaToDTO(s));
+			}
+		}
+		
+		return res;
+	}
+
 
 	
 	@Override

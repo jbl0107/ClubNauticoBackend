@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 import com.clubnautico.dto.PatronDTO;
 import com.clubnautico.entities.Patron;
 import com.clubnautico.exceptions.PatronBarcosException;
+import com.clubnautico.exceptions.PatronSalidasException;
 import com.clubnautico.exceptions.ResourceNotFoundException;
 import com.clubnautico.repositories.BarcoRepository;
 import com.clubnautico.repositories.PatronRepository;
+import com.clubnautico.repositories.SalidaRepository;
 import com.clubnautico.services.PatronService;
 
 @Service
@@ -25,6 +27,9 @@ public class PatronServiceImpl implements PatronService{
 	
 	@Autowired
 	private BarcoRepository barcoRepositoryImpl;
+	
+	@Autowired
+	private SalidaRepository salidaRepositoryImpl;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -104,6 +109,12 @@ public class PatronServiceImpl implements PatronService{
 		else if (!barcoRepositoryImpl.findByPatronId(id).isEmpty()) {
 			throw new PatronBarcosException("No es posible eliminar un patrón que tiene barcos asociados. Por favor, "
 					+ "elimine primero los barcos correspondientes.");
+			
+		}
+		else if(!salidaRepositoryImpl.findByPatronId(id).isEmpty()) {
+			throw new PatronSalidasException("No es posible eliminar un patrón que tiene salidas asociadas. Por favor, "
+					+ "elimine primero las salidas correspondientes.");
+			
 			
 		}else {
 			patronRepositoryImpl.delete(patron.get());

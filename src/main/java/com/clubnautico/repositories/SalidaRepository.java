@@ -9,5 +9,6 @@ import com.clubnautico.entities.Salida;
 public interface SalidaRepository extends JpaRepository<Salida, Long>{
 	
 	List<Salida> findByBarcoId(long id);
+	List<Salida> findByPatronId(long id);
 
 }

@@ -220,4 +220,16 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
 		
 	}
+	
+	
+	@ExceptionHandler(PatronSalidasException.class)
+	public ResponseEntity<ApiResponse> handlerPatronSalidasException(PatronSalidasException patronSalidasException, 
+			WebRequest webRequest){
+		
+		ApiResponse apiResponse = new ApiResponse(400, "Bad Request", patronSalidasException.getMessage(),
+				webRequest.getDescription(false));
+		
+		return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
+		
+	}
 }

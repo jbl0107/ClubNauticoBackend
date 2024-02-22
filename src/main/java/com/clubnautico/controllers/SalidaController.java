@@ -46,6 +46,11 @@ public class SalidaController {
 		return new ResponseEntity<>(salidaServiceImpl.findByBarcoId(id), HttpStatus.OK);
 	}
 	
+	@GetMapping("/patron/{id}")
+	public ResponseEntity<List<SalidaDTO>> findByPatronId(@PathVariable(name = "id") long id){
+		return new ResponseEntity<>(salidaServiceImpl.findByPatronId(id), HttpStatus.OK);
+	}
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<SalidaDTO> update(@RequestBody @Valid SalidaDTO salidaDTO, 
 			@PathVariable(name = "id") long id){

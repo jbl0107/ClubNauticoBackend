@@ -19,4 +19,6 @@ public interface SalidaService {
 
 	public List<SalidaDTO> findByBarcoId(long id);
 
+	public List<SalidaDTO> findByPatronId(long id);
+
 }
